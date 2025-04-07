@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'providers/todo_provider.dart';
 import 'screens/home_screen.dart';
-import 'utils/theme.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    ChangeNotifierProvider(
+      create: (_) => TodoProvider()..loadTodos(),
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -13,11 +18,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'To-Do Widget App',
-      theme: lightTheme,
-      darkTheme: darkTheme,
-      home: const HomeScreen(),
+      title: 'Todo Widget App',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: const HomePage(), // 나중에 만들 페이지
     );
   }
 }
